@@ -1,0 +1,194 @@
+/*
+ * Problem Set 1
+ * 
+ * Name: Yu Zeng
+ * yuzeng@bu.edu
+ * A simple interactive program that performs operations 
+ * on a set of three integers.
+ *
+ * CS112
+ * 
+ *
+ */
+
+import java.util.*; //import the scanner class to allow user input
+/*
+ * Program Class Definition
+ */
+public class SimpleStats {
+
+    /*
+     * printMenu()
+     *
+     * Method to display user options.
+     */
+    public static void printMenu() {
+        System.out.println("(0) Enter new numbers");
+        System.out.println("(1) Find the largest");
+        System.out.println("(2) Compute the sum");
+        System.out.println("(3) Compute the range (largest - smallest)");
+        System.out.println("(4) Compute the average");
+        System.out.println("(5) Print the numbers in ascending order");
+        System.out.println("(6) Quit");
+        System.out.println();
+    }   
+    /*** PUT YOUR SEPARATE METHODS FOR OPTIONS 1-5 HERE 
+     * @return ***/
+    /*method one is used to find the largest number, takes in three
+      integers and find the largest*/
+    public static int methodOne(int n1, int n2, int n3) {
+    	int largestNumber;
+    	if (n1 >= n2 && n1 >=n3) { // if n1 is bigger than both numbers, it must be the biggest
+    		largestNumber = n1;
+    	} else if (n2>=n1 && n2>=n3){ //if n2 is bigger than both numbers, it must be the biggest 
+    		largestNumber =n2;
+    	} else { //if n1 and n2 are not the biggest, n3 must be the biggest number 
+    		largestNumber = n3;
+    	}
+    	
+    	return largestNumber;
+    }   
+    //method two is aimed to take in three integers and gather the sum 
+    public static int methodTwo(int n1, int n2, int n3) {
+    	int sum = n1 + n2 + n3;   	
+    	return sum;
+    }   
+    //method three is aimed to take in three integers and find the range of the numbers
+    public static int methodThree(int n1, int n2, int n3) {
+    	int largestNumber = methodOne( n1, n2, n3);
+    	int smallestNumber;
+    	
+    	if (n1 <= n2 && n1 <= n3) { //this is used to find the smallest numbers among the three inputs
+    	 smallestNumber = n1;
+    	} else if (n2<= n1 && n2 <=n3) {
+    		smallestNumber = n2;
+    	}else {
+    		smallestNumber = n3;
+    	}
+
+    	int range = largestNumber - smallestNumber;
+    	return range;
+    }  
+    //method four is aimed to take in three integers and find the average of them
+    public static float methodFour(int n1, int n2, int n3) {
+    	float average = (float)(methodTwo(n1, n2, n3) / 3.0); //float --> decimal 
+    	return average;
+    }   
+    //method five is aimed to take in three integers and place the three numbers from the lowest to the highest
+    public static void methodFive(int n1, int n2, int n3) { 
+    	int largestNumber = methodOne( n1, n2, n3);
+    	int smallestNumber;
+    	int middleNumber;
+
+    	if (n1 <= n2 && n1 <= n3) { //if statement used to determine the smallest number
+       	 smallestNumber = n1;
+       	} else if (n2<= n1 && n2 <=n3) {
+       		smallestNumber = n2;
+       	}else {
+       		smallestNumber = n3;
+       	}
+    	
+    	if (largestNumber == n1 && smallestNumber == n2) {//if statement used to determine the middle number
+    		middleNumber = n3;	
+    	}else if(smallestNumber == n1 && largestNumber == n2) {//if statement used to determine the middle number
+        		middleNumber = n3;
+    	} else if (smallestNumber == n1 && largestNumber == n3) {
+    		middleNumber = n2;		
+    	} else if (largestNumber == n1 && smallestNumber == n3) {
+    		middleNumber = n2;
+    	}else {
+    		middleNumber = n1;
+    	}
+    	System.out.println("The three numbers in ascending order: " + smallestNumber + " "+ middleNumber +" "+ largestNumber); //print out the message instead of returning it
+    	
+    }
+    /*
+     * main()
+     *
+     * Program execution begins with this method.
+     */
+    public static void main(String[] args) {
+        // Create an instance of a scanner object and
+	// connect to the standard input device
+    	Scanner console = new Scanner(System.in);
+        // variable declarations and initializations as needed
+        boolean more_input = true;  
+        boolean newNumber = false; //this will become true if and only if the three numbers are updated
+        int n1 = 0;
+        int n2= 0;
+        int n3 = 0;   
+	/*
+ 	 * Control loop
+ 	 */
+        do {
+	    // If numbers have been entered (choice 0) has been selected, output the numbers
+        	System.out.println("The current numbers: " + n1 + " " + n2 +" "+ n3);
+	    // Call the method which displays the menu choices
+            printMenu();
+	    // Prompt to enter the choice of operation
+        	System.out.print("which mode: ");
+        	int choice = console.nextInt();          	
+            /*
+             * Expand this conditional statement to correctly process all choices.
+             * Make sure to follow the guidelines in the assignment for
+             * doing so.
+             */
+            if (choice == 0) {
+                System.out.println("Enter three new numbers: ");
+		// Input the three numbers
+            	n1 = console.nextInt();
+            	n2 = console.nextInt();
+            	n3 = console.nextInt();    
+            	newNumber = true;
+		// Verify the numbers entered by printing them out
+		        System.out.println("The current numbers are " + n1 +" "+ n2 + " "+ n3);
+		        
+            } else if (choice == 1 ) {
+            	if(newNumber == false) {
+            		System.out.println("You cannot choose option (" + choice +") unless you have entered three numbers.\n\n");
+            		continue;
+            	}
+            	
+            	System.out.println("The biggest of the numbers is " + methodOne(n1,n2,n3));
+            } else if (choice ==2 ) {
+            	if(newNumber == false) {
+            		System.out.println("You cannot choose option (" + choice +") unless you have entered three numbers.\n\n");
+            		continue;
+            	}
+            	
+            	System.out.println("the sum of the three numbers is " + methodTwo(n1,n2,n3));
+            	
+            } else if (choice ==3 ) {
+            	if(newNumber == false) {
+            		System.out.println("You cannot choose option (" + choice +") unless you have entered three numbers.\n\n");
+            		continue;
+            	}
+            	
+            	System.out.println("the range of the three numbers is " + methodThree(n1,n2,n3));
+            } else if (choice ==4 ) {
+            	if(newNumber == false) {
+            		System.out.println("You cannot choose option (" + choice +") unless you have entered three numbers.\n\n");
+            		continue;
+            	}
+            	
+            	System.out.println("The average of the three number is " +methodFour(n1,n2,n3));
+            			
+            } else if (choice ==5 ) {
+            	if(newNumber == false) {
+            		System.out.println("You cannot choose option (" + choice +") unless you have entered three numbers.\n\n");
+            		continue;
+            	}
+            methodFive(n1,n2,n3);
+            
+            } else if (choice == 6) {
+                more_input = false;
+                
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+            }          
+            System.out.println();
+        } while (more_input);
+        
+        System.out.println("Have a nice day!");
+    }
+}
